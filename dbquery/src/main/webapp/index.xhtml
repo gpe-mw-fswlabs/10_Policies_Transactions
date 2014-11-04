@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Database Query</title>
+	<h:outputStylesheet library="css" name="table-style.css"  />
+</h:head>
+
+<h:body>
+	<h3>Database Query</h3>
+
+	<h:form id="form">
+		<h:panelGrid columns="3">
+			<h:outputLabel value="Please enter query: " />
+			<h:inputText value="#{sqlquery}" id="sqlquery" />
+			<h:commandButton value="Submit Query" action="#{dbcontroller.executeQuery(sqlquery)}" />
+		</h:panelGrid>
+		
+		<h:panelGroup id="resultsList">
+			<h:outputLabel value="Query Results:" />
+			<h:dataTable var="quote" value="#{dbcontroller.results}"
+				styleClass="results-table"
+    			headerClass="results-table-header"
+    			rowClasses="results-table-odd-row,results-table-even-row">
+				<h:column><f:facet name="header">ID</f:facet>#{quote.policyQuoteID}</h:column>
+				<h:column><f:facet name="header">Driver Name</f:facet>#{quote.driverName}</h:column>
+				<h:column><f:facet name="header">Age</f:facet>#{quote.age}</h:column>
+				<h:column><f:facet name="header">Credit Score</f:facet>#{quote.creditScore}</h:column>
+				<h:column><f:facet name="header">Policy Type</f:facet>#{quote.policyType}</h:column>
+				<h:column><f:facet name="header"># of Accidents</f:facet>#{quote.numberOfAccidents}</h:column>
+				<h:column><f:facet name="header"># of Tickets</f:facet>#{quote.numberOfTickets}</h:column>
+				<h:column><f:facet name="header">Vehicle Year</f:facet>#{quote.vehicleYear}</h:column>
+				<h:column><f:facet name="header">Price</f:facet>#{quote.price}</h:column>
+			</h:dataTable>
+		</h:panelGroup>
+	</h:form>
+</h:body>
+
+</html>
